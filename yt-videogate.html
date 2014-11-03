@@ -1,0 +1,137 @@
+<head>
+  <title>yt-videogate</title>
+</head>
+
+<body>
+	<div class="container">
+		
+
+	</div>
+</body>
+
+<template name="home">
+  		{{> youtubeURLForm}}
+  		<div id="ytplayer"></div>
+  		{{> youtubeurls}}
+</template>
+
+<template name="hello">
+  <button>Click Me</button>
+  <p>You've pressed the button {{counter}} times.</p>
+</template>
+
+<template name="youtubeURLForm">
+	<form role="form">
+	  <div class="form-group">
+	    <label for="youtubeURL">YouTube URL</label>
+	    <input type="text" class="form-control" id="youtubeURL" name="youtubeURL" placeholder="Enter YouTube URL">
+	  </div>
+	  <button type="submit" class="btn btn-default submit">Submit</button>
+	</form>
+</template>
+
+<template name="youtubeurl">
+	<span id="pref-{{_id}}"><span id="ytid">{{youtubeId}}</span>, <span id="stopAt">{{stopAt}}</span> {{date}}</span>
+	<ul>
+	{{#each lead}}
+		<li>{{email}}</li>
+	{{/each}}
+	</ul>
+</template>
+
+<template name="youtubeurls">
+    {{#each items}}
+        {{> youtubeurl}}
+        <div class="slider"></div><div id="field"></div>
+		<button id="videogate-time-save" type="submit" class="btn btn-default save" style="display:none">Save</button>
+		<button class="btn btn-default">Get Widget Code</button>
+		<textarea>
+				<script src="http://adriamooney.com/lab/projects/scripts/sdk.v1.js" data-vg-widget="{{ _id }}"></script>
+				<script>
+				    VG_WIDGET.init({domain:'http://adriamooney.com/lab/scripts'}, function() {
+				        VG_WIDGET.configure({ stopAt:  {{stopAt}}, youtubeId: '{{youtubeId}}', id: '{{_id}}' });
+				    });
+				</script>
+				<div id="vg-widget-wrap"><div id="ytplayer"></div></div>
+		</textarea>	
+     {{/each}}
+</template>
+
+<template name="widget">
+        {{> youtubeurl}}
+        <div id="ytapi-wrap">
+        	<form id="vg-widget-form" style="display:none"><input type="text" value="" name="ytvg_email" id="ytvg_email"/><button type="submit" id="submitform">Submit</button></form>
+        </div>
+
+</template>
+
+<template name="ytapi">
+	<div id="ytplayer"></div>
+	<script>
+			var ytid = $('#ytid').text();
+			var ytstopAt = $('#stopAt').text();
+			var player = undefined;
+
+			var tag = document.createElement('script');
+		    tag.src = "//www.youtube.com/iframe_api";
+		    tag.id = "iframe_api_script";
+		    var firstScriptTag = document.getElementsByTagName('script')[0];
+		    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+		     window.onYouTubePlayerAPIReady = function() {
+		        player = new YT.Player('ytplayer', {
+		          videoId: ytid,
+		          playerVars: {
+		          	'modestbranding': 1
+		          },
+		          events: {
+		            'onReady': onPlayerReady,
+		            'onStateChange': onPlayerStateChange
+		          }, 
+		          playerVars: {enablejsapi: true}
+		        });
+		      }
+
+		      function onPlayerReady(event) {
+		        var len = player.getDuration();
+		      }
+		      var done = false;
+	          //TODO: also show form if they haven't filled it out, even if after the stop time.
+	          //set a cookie and if cookie is not set, then force player back to stopAt time and pause.
+	          //when form is submitted, resume video and remove form.
+	          //player.loadVideoById(videoId:String, startSeconds:Number, suggestedQuality:String):Void
+	          function onPlayerStateChange(event) {
+	            	var stop = ytstopAt * 1000;
+	              	var currentTime = player.getCurrentTime();
+	              	var cookie = Cookie.get('yt-vidgate');
+	              	console.log(cookie);
+
+	              	if (cookie != 'yt-vidgate-unlocked') {
+	              		if ( currentTime > ytstopAt ) {
+		              		stopVideoSeek(); //only true if form has not been filled out;
+		              	}
+		            
+			            if (event.data == YT.PlayerState.PLAYING && !done) {
+			              setTimeout(stopVideo, stop);
+			              done = true;
+			            }
+	              	}
+		         
+	          	}
+
+	          function stopVideoSeek() {
+	          	player.pauseVideo();
+	            player.seekTo(ytstopAt, false);
+
+	          }
+
+	          function stopVideo() {
+	            player.pauseVideo();
+            	$('#vg-widget-form').show();
+	          }
+
+	</script>
+</template>
+
+
+

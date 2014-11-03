@@ -1,0 +1,98 @@
+1.  enter youtube url:
+
+makes post to:
+https://www.fanbridge.com/ajax/widget/video/get_video_data.php
+
+POST:  video_url
+https://www.youtube.com/watch?v=dJyvcNmYwr4
+
+video_url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdJyvcNmYwr4
+
+
+response:  
+{"provider_url":"http:\/\/www.youtube.com\/","description":"http:\/\/ashow.zefrank.com Akiyoshi's illusion pages :: http:\/\/bit.ly\/LmjPMA :: (used with permission) Stefan Bucher's youtubes :: http:\/\/www.youtube.com\/StefanGBucher\/ Music: http:\/\/soundcloud.com\/misternorman\/gypsy LottoLab :: http:\/\/www.lottolab.org\/ Images From :: http:\/\/en.wikipedia.org\/wiki\/List_of_optical_illusions","title":"Your Eyes Are Stupid","url":"http:\/\/www.youtube.com\/watch?v=dJyvcNmYwr4","author_name":"zefrank1","height":480,"thumbnail_width":480,"width":854,"html":"<iframe class=\"embedly-embed\" src=\"\/\/cdn.embedly.com\/widgets\/media.html?src=http%3A%2F%2Fwww.youtube.com%2Fembed%2FdJyvcNmYwr4%3Ffeature%3Doembed&url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdJyvcNmYwr4&image=http%3A%2F%2Fi.ytimg.com%2Fvi%2FdJyvcNmYwr4%2Fhqdefault.jpg&key=b592865061134671840f3d78200c789d&type=text%2Fhtml&schema=youtube\" width=\"854\" height=\"480\" scrolling=\"no\" frameborder=\"0\" allowfullscreen><\/iframe>","author_url":"http:\/\/www.youtube.com\/user\/zefrank1","version":"1.0","provider_name":"YouTube","thumbnail_url":"http:\/\/i.ytimg.com\/vi\/dJyvcNmYwr4\/hqdefault.jpg","type":"video","thumbnail_height":360,"id":"dJyvcNmYwr4","channel_id":"UCVpankR4HtoAVtYnFDUieYA","video_length":206}
+
+
+2.click ‘set up gating’
+
+makes post to: https://www.fanbridge.com/ajax/campaigns/socialnet/video_gating.php?video_external_id=dJyvcNmYwr4
+
+the popup opens up with the video in it, plus a slider to select the time you want the video gate to show.
+when you hit save, then:
+
+GET to:  https://www.youtube.com/get_video_info?html5=1&video_id=dJyvcNmYwr4&cpn=DHuKIKYlTRBKPq_3&eurl=https%3A%2F%2Fwww.fanbridge.com%2Fwidget%2Frender%2Fdummy%3Fmodule_token%3Dvideo&el=embedded&hl=en_US&sts=16363&lact=265089&width=638&height=359&authuser=0&iframe=1&c=web&cver=html5
+
+
+3. click ‘get widget code’
+
+POST to https://www.fanbridge.com/ajax/widget/create/default.php
+
+POST: 
+
+_csrf_token	f3f4ea3849ea740e7b9e667a33bb533ff1fa40c66149ac9f8085033efc62efc351a3e178f05e20a9c640f498dd6404eebdfb5622969f77fd9a1a7dd358558e03
+background_color	#FFFFFF
+channel_id	UCVpankR4HtoAVtYnFDUieYA
+channel_name	zefrank1
+custom_width	
+external_id	dJyvcNmYwr4
+gated	1
+gating_custom_message	
+gating_message	Subscribe on YouTube to zefrank1 to watch the entire video and join the fan list!
+gating_time_	
+gating_time_dJyvcNmYwr4	28
+influencer_name	tbd labs
+module_token	video
+network	youtube
+thumbnail_url	http://i.ytimg.com/vi/dJyvcNmYwr4/hqdefault.jpg
+video_length	206
+video_title	Your Eyes Are Stupid
+widget_border_color	B3B3B3
+widget_gating_type	subscriber
+widget_id	0
+widget_theme	dark
+widget_url	
+widget_width	640
+
+response:
+{"embed":"<script type=\"text\/javascript\">\n(function() {\n\tvar secure = (\"https:\" == document.location.protocol);\n\tvar fb_js_host = (secure ? \"https:\/\/www.fanbridge.com\" : \"http:\/\/widget-platform.fanbridge.com\");\n\twindow._FBRIDGE_WIDGETS_HOST = fb_js_host;\n\tdocument.write(unescape(\"%3Ciframe src='\" + fb_js_host + \"\/widget\/render\/20579' width='640' height='389' frameborder='0' ' %3E%3C\/iframe%3E\"));\n\tvar p, s, id = 'fbridge-widgetjssdk-v1';\n\tp = document.createElement('script'); p.id = id; p.type = 'text\/javascript'; p.async = true;\n\tp.src = (secure ? \"https:\/\/ssl.fbridgecdn.net\" : \"http:\/\/static.fbridgecdn.net\") + '\/js\/fb\/widget\/v1\/platform.js?_=' + ((new Date()).getTime());\n\ts = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(p, s);\n})();\n<\/script>","url":"http:\/\/widget-platform.fanbridge.com\/widget\/render\/20579","tiny_url":"http:\/\/fburls.com\/15-u6M8IdZd","id":20579}
+
+widget code looks like this:
+
+<script type="text/javascript">
+(function() {
+	var secure = ("https:" == document.location.protocol);
+	var fb_js_host = (secure ? "https://www.fanbridge.com" : "http://widget-platform.fanbridge.com");
+	window._FBRIDGE_WIDGETS_HOST = fb_js_host;
+	document.write(unescape("%3Ciframe src='" + fb_js_host + "/widget/render/20582' width='640' height='389' frameborder='0' ' %3E%3C/iframe%3E"));
+	var p, s, id = 'fbridge-widgetjssdk-v1';
+	p = document.createElement('script'); p.id = id; p.type = 'text/javascript'; p.async = true;
+	p.src = (secure ? "https://ssl.fbridgecdn.net" : "http://static.fbridgecdn.net") + '/js/fb/widget/v1/platform.js?_=' + ((new Date()).getTime());
+	s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(p, s);
+})();
+</script>
+
+4.  paste the code on a website
+
+the code executes and inserts the platform.js script above the snippet, and generates and iframe below the snippet
+
+
+          <script src="http://static.fbridgecdn.net/js/fb/widget/v1/platform.js?_=1413920845922" async="" type="text/javascript" id="fbridge-widgetjssdk-v1"></script>
+
+<iframe src="http://widget-platform.fanbridge.com/widget/render/20448" frameborder="0" height="288" width="460"></iframe>
+
+5.  the platform.js script loads query and the code that submits the form after a person subscribes
+
+6.  the iframe contains youtube iframe inside it, along with form and other scripts that execute the gating at the right time.
+
+7.  when someone subscribes, it makes a GET to:
+
+http://widget-platform.fanbridge.com/signup/fansignup_form.php?response=json&email=asdf%40asf.com&agent=widget-video&userid=205852&group_id[]=1479673
+
+{"status":"ok","data":{"subscriber_status":"inserted","subscriber_id":244042083}}
+
+
+NOTES:
+
+https://developers.google.com/youtube/iframe_api_reference
+
+
