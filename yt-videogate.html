@@ -26,17 +26,59 @@
 	    <label for="youtubeURL">YouTube URL</label>
 	    <input type="text" class="form-control" id="youtubeURL" name="youtubeURL" placeholder="Enter YouTube URL">
 	  </div>
+	  <div class="form-group">
+	    <label for="vidgatemsg">Video Gating Message</label>
+	    <input type="text" class="form-control" id="vidgatemsg" name="vidgatemsg" placeholder="Message for your Video Gate">
+	  </div>
+	  <div class="form-group" id="vidgatefields">
+	    <label for="vidgatefields">Fields to collect</label>
+	    <label class="checkbox-inline">
+		  <input type="checkbox" id="inlineCheckbox1" value="fname"> First Name
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" id="inlineCheckbox2" value="lname"> Last Name
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" id="inlineCheckbox3" value="email"> Email
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" id="inlineCheckbox4" value="company"> Company
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" id="inlineCheckbox5" value="phone"> Phone
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" id="inlineCheckbox6" value="address"> Address
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" id="inlineCheckbox7" value="city"> City
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" id="inlineCheckbox8" value="state"> State
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" id="inlineCheckbox9" value="zip"> Zip Code
+		</label>
+	  </div>
 	  <button type="submit" class="btn btn-default submit">Submit</button>
 	</form>
 </template>
 
 <template name="youtubeurl">
 	<span id="pref-{{_id}}"><span id="ytid">{{youtubeId}}</span>, <span id="stopAt">{{stopAt}}</span> {{date}}</span>
-	<ul>
-	{{#each lead}}
-		<li>{{email}}</li>
-	{{/each}}
-	</ul>
+	<span id="vd-gt-msg">{{msg}}</span>
+</template>
+
+<template name="leads">
+	<div style="display:none">
+		<span id="pref-{{_id}}"><span id="ytid">{{youtubeId}}</span>, <span id="stopAt">{{stopAt}}</span> {{date}}</span>
+		<span id="vd-gt-msg">{{msg}}</span>
+		<ul>
+		{{#each lead}}
+			<li>{{email}}</li>
+		{{/each}}
+		</ul>
+	</div>
 </template>
 
 <template name="youtubeurls">
@@ -44,25 +86,121 @@
         {{> youtubeurl}}
         <div class="slider"></div><div id="field"></div>
 		<button id="videogate-time-save" type="submit" class="btn btn-default save" style="display:none">Save</button>
-		<button class="btn btn-default">Get Widget Code</button>
-		<textarea>
-				<script src="http://adriamooney.com/lab/projects/scripts/sdk.v1.js" data-vg-widget="{{ _id }}"></script>
-				<script>
-				    VG_WIDGET.init({domain:'http://adriamooney.com/lab/scripts'}, function() {
-				        VG_WIDGET.configure({ stopAt:  {{stopAt}}, youtubeId: '{{youtubeId}}', id: '{{_id}}' });
-				    });
-				</script>
-				<div id="vg-widget-wrap"><div id="ytplayer"></div></div>
+		<button class="btn btn-default">Get Widget Code</button><a href="/widget/{{_id}}" class="btn btn-primary">Preview Widget</a>
+		<textarea id="widget-code">
+			<div id="ytapi-wrap" style="height: 0; padding-bottom: 56.25%; position: relative;">
+				<iframe src="http://localhost:3000/widget/{{_id}}" width="" height="" style="height: 100%;left: 0;position: absolute;top: 0;width: 100%;"></iframe>
+			</div>
 		</textarea>	
      {{/each}}
 </template>
 
 <template name="widget">
-        {{> youtubeurl}}
-        <div id="ytapi-wrap">
-        	<form id="vg-widget-form" style="display:none"><input type="text" value="" name="ytvg_email" id="ytvg_email"/><button type="submit" id="submitform">Submit</button></form>
-        </div>
+        {{> leads}}
 
+        <div id="ytapi-wrap">
+        	<form id="vg-widget-form" style="display:none" class="form-horizontal">
+        		<h4>{{msg}}</h4>
+        		{{#if incFname}}
+        		<div class="form-group">
+		    		<label for="ytvg_fname">First Name</label>
+	        		<input class="form-control" type="text" value="" name="ytvg_fname" id="ytvg_fname"/>
+        		</div>
+        		{{/if}}
+        		{{#if incLname}}
+        		<div class="form-group">
+		    		<label for="ytvg_lname">Last Name</label>
+	        		<input class="form-control" type="text" value="" name="ytvg_lname" id="ytvg_lname"/>
+        		</div>
+        		{{/if}}
+        		{{#if incCompany}}
+        		<div class="form-group">
+		    		<label for="ytvg_company">Company</label>
+	        		<input class="form-control" type="text" value="" name="ytvg_company" id="ytvg_company"/>
+        		</div>
+        		{{/if}}
+        		{{#if incAddress}}
+        		<div class="form-group">
+		    		<label for="ytvg_address">Address</label>
+	        		<input class="form-control" type="text" value="" name="ytvg_address" id="ytvg_address"/>
+        		</div>
+        		{{/if}}
+        		<div class="form-inline">
+        		<div class="form-group">
+		    		{{#if incCity}}<label for="ytvg_address">City</label>
+	        		<input class="form-control" type="text" value="" name="ytvg_city" id="ytvg_city"/>{{/if}}
+	        		{{#if incState}}<label for="ytvg_state">State</label>
+	        		<input class="form-control" type="text" value="" name="ytvg_state" id="ytvg_state" min="2" max="2" />{{/if}}
+	        		{{#if incZip}}<label for="ytvg_zip">Zip Code</label>
+	        		<input class="form-control" type="text" value="" name="ytvg_zip" id="ytvg_zip"/>{{/if}}
+        		</div>
+        		</div>
+        		{{#if incEmail}}
+        		<div class="form-group">
+		    		<label for="ytvg_email">Email</label>
+	        		<input class="form-control" type="email" value="" name="ytvg_email" id="ytvg_email"/>
+        		</div>
+        		{{/if}}
+        		{{#if incPhone}}
+        		<div class="form-group">
+		    		<label for="ytvg_phone">Phone</label>
+	        		<input class="form-control" type="phone" value="" name="ytvg_phone" id="ytvg_phone"/>
+        		</div>
+        		{{/if}}
+        		<button class="btn btn-default" type="submit" id="submitform">Submit</button>
+        	</form>
+        </div>
+        <a class="btn btn-primary" href="/widget/{{_id}}/edit">Edit Widget</a><a class="btn btn-default" href="/">New Widget</a>
+</template>
+
+
+<template name="edit_widget">
+	<form role="form">
+		<input type="hidden" value="{{_id}}" id="vidID" />
+	  <div class="form-group">
+	    <label for="youtubeURL">YouTube URL</label>
+	    <input type="text" class="form-control" id="youtubeURL" name="youtubeURL" value="{{youtubeId}}" disabled>
+	  </div>
+	  <div class="form-group">
+	    <label for="vidgatemsg">Video Gating Message</label>
+	    <input type="text" class="form-control" id="vidgatemsg" name="vidgatemsg" value="{{msg}}">
+	  </div>
+	  <div class="form-group">
+	    <label for="vidgatemsg">Video Gate Time</label>
+	    <input type="text" class="form-control" id="stopAt" name="stopAt" value="{{stopAt}}">
+	  </div>
+	  <div class="form-group" id="vidgatefields">
+	    <label for="vidgatefields">Fields to collect</label>
+	    <label class="checkbox-inline">
+		  <input type="checkbox" id="inlineCheckbox1" value="fname"> First Name
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" id="inlineCheckbox2" value="lname"> Last Name
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" id="inlineCheckbox3" value="email"> Email
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" id="inlineCheckbox4" value="company"> Company
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" id="inlineCheckbox5" value="phone"> Phone
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" id="inlineCheckbox6" value="address"> Address
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" id="inlineCheckbox7" value="city"> City
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" id="inlineCheckbox8" value="state"> State
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" id="inlineCheckbox9" value="zip"> Zip Code
+		</label>
+	  </div>
+	  <button type="submit" class="btn btn-default submit" id="submitform">Submit</button>
+	</form>
 </template>
 
 <template name="ytapi">

@@ -1,4 +1,40 @@
 /* CSS declarations go here */
-textarea {
+#widget-code {
 	font-family:monospace;
+	width: 700px;
+	height:150px;
+	border: 3px #666 dashed;
+}
+#ytapi-wrap {
+	height: 0;
+    padding-bottom: 56.25%;
+    position: relative;
+}
+#ytapi-wrap iframe {
+	height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+#vg-widget-form {
+	position:absolute;
+	background:rgba(255,255,255,.85);
+	width: 100%;
+	left: 10%;
+    width: 80%;
+    z-index: 10000;
+    padding: 0 20px 20px 20px;
+    height:100%;
+    overflow:scroll;
+}
+#vg-widget-form .form-horizontal .form-group {
+	margin: 0;
+}
+#vg-widget-form .form-inline {
+	height:0;
+}
+#vg-widget-form .form-inline .form-group{
+	margin-bottom:8px;
+	margin-top:16px;
 }

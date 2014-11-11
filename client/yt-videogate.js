@@ -2,12 +2,22 @@ YouTubeUrl = new Meteor.Collection("youtubeurl");
 
 Meteor.subscribe("youtubeurl");
 
+
 Router.route('/', function () {
   this.render('Home');
 });
 
 Router.route('/widget/:_id', function () {
   this.render('widget', {
+    data: function () {
+      return YouTubeUrl.findOne({_id: this.params._id});
+    }
+  });
+
+}); 
+
+Router.route('/widget/:_id/edit', function () {
+  this.render('edit_widget', {
     data: function () {
       return YouTubeUrl.findOne({_id: this.params._id});
     }
@@ -29,14 +39,47 @@ Template.widget.events({
     console.log(this);
     var email = $('#ytvg_email').val();
 
+    //validation:
+    if(email !== '') {
+      Meteor.call("submitForm",email, this._id);
+    }
 
-    Meteor.call("submitForm",email, this._id);
-    //TODO: add validation
+
+    
+    //TODO: add validation, onlyl play video is form is submitted successfully
+    console.log(player);
 
     
     setTimeout(function(){player.playVideo()}, 1000);
   }
 
+});
+
+Template.edit_widget.events({
+    'click #submitform': function (e) {
+    e.preventDefault();
+    var id = document.getElementById("vidID").value;
+    var msg = document.getElementById("vidgatemsg").value;
+    var stopAt = document.getElementById("stopAt").value;
+    var checkedValues = $('#vidgatefields input:checkbox').map(function() {
+        if( $(this).is(":checked") ) {
+          return true;
+        }
+        else {
+          return false;
+        }
+    }).get();
+
+    //Meteor.call("videoGateTime",hmsToSecondsOnly(val), this._id);
+
+    Meteor.call("editForm", id, msg, stopAt, checkedValues[0], checkedValues[1], checkedValues[2], checkedValues[3], checkedValues[4], checkedValues[5], checkedValues[6], checkedValues[7], checkedValues[8], function(error , preferenceId){
+          console.log('edited form');
+          Router.go('/widget/'+id);
+          
+           setTimeout(function(){window.location.reload()}, 1000);
+    });
+
+  }
 });
  
 Template.youtubeurls.items = function(){
@@ -88,12 +131,23 @@ Template.youtubeurls.items = function(){
         var val = document.getElementById("youtubeURL").value;
         var spl = val.split('=');
         var youtubeURL = spl[1];
-        Meteor.call("enterYTURL",youtubeURL,function(error , preferenceId){
+        var msg = document.getElementById("vidgatemsg").value;
+
+
+        var checkedValues = $('#vidgatefields input:checkbox').map(function() {
+            if( $(this).is(":checked") ) {
+              return true;
+            }
+            else {
+              return false;
+            }
+        }).get();
+
+        //TODO: add validation before this is called
+        Meteor.call("enterYTURL",youtubeURL, msg, checkedValues[0], checkedValues[1], checkedValues[2], checkedValues[3], checkedValues[4], checkedValues[5], checkedValues[6], checkedValues[7], checkedValues[8], function(error , preferenceId){
           console.log('added youtube with Id .. '+preferenceId+' and value of '+youtubeURL);
         });
-       /* Meteor.call("newVideo", 360, 640, youtubeURL, function(error) {
-          console.log(youtubeURL);
-        });  */
+
         newVideo(640, 360, youtubeURL);
 
         var player = undefined;
