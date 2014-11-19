@@ -3,81 +3,112 @@
 </head>
 
 <body>
-	<div class="container">
-		
 
-	</div>
+	
 </body>
 
-<template name="home">
-  		{{> youtubeURLForm}}
-  		<div id="ytplayer"></div>
-  		{{> youtubeurls}}
+<template name="header">
+	<!-- Static navbar -->
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">YouTube Video Gate Generator</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#">About</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
 </template>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+
+<template name="home">
+		{{>header}}
+		<div class="container">
+  			{{> youtubeURLForm}}
+  			<div id="ytplayer"></div>
+  			{{> youtubeurls}}
+  		</div>
 </template>
+
 
 <template name="youtubeURLForm">
-	<form role="form">
+	<form role="form" id="configure-form">
 	  <div class="form-group">
 	    <label for="youtubeURL">YouTube URL</label>
 	    <input type="text" class="form-control" id="youtubeURL" name="youtubeURL" placeholder="Enter YouTube URL">
 	  </div>
 	  <div class="form-group">
-	    <label for="vidgatemsg">Video Gating Message</label>
+	    <label for="vidgatemsg">Video Gate Form Headline</label>
 	    <input type="text" class="form-control" id="vidgatemsg" name="vidgatemsg" placeholder="Message for your Video Gate">
 	  </div>
 	  <div class="form-group" id="vidgatefields">
 	    <label for="vidgatefields">Fields to collect</label>
-	    <label class="checkbox-inline">
-		  <input type="checkbox" id="inlineCheckbox1" value="fname"> First Name
-		</label>
-		<label class="checkbox-inline">
-		  <input type="checkbox" id="inlineCheckbox2" value="lname"> Last Name
-		</label>
-		<label class="checkbox-inline">
-		  <input type="checkbox" id="inlineCheckbox3" value="email"> Email
-		</label>
-		<label class="checkbox-inline">
-		  <input type="checkbox" id="inlineCheckbox4" value="company"> Company
-		</label>
-		<label class="checkbox-inline">
-		  <input type="checkbox" id="inlineCheckbox5" value="phone"> Phone
-		</label>
-		<label class="checkbox-inline">
-		  <input type="checkbox" id="inlineCheckbox6" value="address"> Address
-		</label>
-		<label class="checkbox-inline">
-		  <input type="checkbox" id="inlineCheckbox7" value="city"> City
-		</label>
-		<label class="checkbox-inline">
-		  <input type="checkbox" id="inlineCheckbox8" value="state"> State
-		</label>
-		<label class="checkbox-inline">
-		  <input type="checkbox" id="inlineCheckbox9" value="zip"> Zip Code
-		</label>
+	   	<div>
+		  <input class="incField" type="checkbox" id="fname" value="fname"> First Name
+		  <span class="hidden"><input type="checkbox" value="fnameReq" id="fnameReq"> Required</span>
+		</div>
+		<div>
+		  <input class="incField" type="checkbox" id="lname" value="lname"> Last Name
+		  <span class="hidden"><input type="checkbox" value="lnameReq" id="lnameReq"> Required</span>
+		 </div>
+		<div>
+		  <input class="incField" type="checkbox" id="email" value="email"> Email
+		  <span class="hidden"><input type="checkbox" value="emailReq" id="emailReq"> Required</span>
+        </div>
+        <div>
+		  <input class="incField" type="checkbox" id="company" value="company"> Company
+		  <span class="hidden"><input type="checkbox" value="companyReq" id="companyReq"> Required</span>
+        </div>
+		<div>
+		  <input class="incField" type="checkbox" id="phone" value="phone"> Phone
+		  <span class="hidden"> <input type="checkbox" value="phoneReq" id="phoneReq"> Required</span>
+        </div>
+	   <div>
+		  <input class="incField" type="checkbox" id="address" value="address"> Address
+		  <span class="hidden"> <input type="checkbox" value="addressReq" id="addressReq"> Required</span>
+		</div>
+        <div>
+		 <input class="incField" type="checkbox" id="city" value="city"> City
+		 <span class="hidden"><input type="checkbox" value="cityReq" id="cityReq"> Required</span>
+	   </div>
+       <div>
+		  <input class="incField" type="checkbox" id="state" value="state"> State
+		  <span class="hidden"><input type="checkbox" value="stateReq" id="stateReq"> Required</span>
+        </div>
+        <div>
+		  <input class="incField" type="checkbox" id="zip" value="zip"> Zip Code
+		  <span class="hidden"><input type="checkbox" value="zipReq" id="zipReq"> Required</span>
+        </div>
 	  </div>
 	  <button type="submit" class="btn btn-default submit">Submit</button>
 	</form>
 </template>
 
 <template name="youtubeurl">
-	<span id="pref-{{_id}}"><span id="ytid">{{youtubeId}}</span>, <span id="stopAt">{{stopAt}}</span> {{date}}</span>
-	<span id="vd-gt-msg">{{msg}}</span>
-</template>
-
-<template name="leads">
 	<div style="display:none">
 		<span id="pref-{{_id}}"><span id="ytid">{{youtubeId}}</span>, <span id="stopAt">{{stopAt}}</span> {{date}}</span>
 		<span id="vd-gt-msg">{{msg}}</span>
-		<ul>
+	</div>
+</template>
+
+	<template name="leads">
+		<div style="display:none">
+		<span id="pref-{{_id}}"><span id="ytid">{{youtubeId}}</span>, <span id="stopAt">{{stopAt}}</span> {{date}}</span>
+		<span id="vd-gt-msg">{{msg}}</span>
+		<!--<ul>
 		{{#each lead}}
 			<li>{{email}}</li>
 		{{/each}}
-		</ul>
+		</ul>-->
 	</div>
 </template>
 
@@ -86,7 +117,10 @@
         {{> youtubeurl}}
         <div class="slider"></div><div id="field"></div>
 		<button id="videogate-time-save" type="submit" class="btn btn-default save" style="display:none">Save</button>
-		<button class="btn btn-default">Get Widget Code</button><a href="/widget/{{_id}}" class="btn btn-primary">Preview Widget</a>
+		<button class="btn btn-default" id="get-code" style="display:none">Get Widget Code</button>
+		<button style="display:none" class="btn btn-primary" id="preview-widget">Preview Widget</button>
+		<button style="display:none" class="btn btn-primary" id="new-widget">New Widget</button>
+
 		<textarea id="widget-code">
 			<div id="ytapi-wrap" style="height: 0; padding-bottom: 56.25%; position: relative;">
 				<iframe src="http://localhost:3000/widget/{{_id}}" width="" height="" style="height: 100%;left: 0;position: absolute;top: 0;width: 100%;"></iframe>
@@ -95,112 +129,144 @@
      {{/each}}
 </template>
 
+<template name="preview_widget">
+	{{>header}}
+	<div class="container">
+		{{>widget}}
+		<input type="hidden" value="{{_id}}" id="vidID">
+	 	<a class="btn btn-primary" href="/widget/{{_id}}/edit" id="edit-widget">Edit Widget</a><a class="btn btn-default" href="#" id="new-widget">New Widget</a>
+	</div>
+</template>
+
 <template name="widget">
+	<div class="container">
+
         {{> leads}}
 
         <div id="ytapi-wrap">
         	<form id="vg-widget-form" style="display:none" class="form-horizontal">
         		<h4>{{msg}}</h4>
-        		{{#if incFname}}
+        		{{#if incOptions.incFname}}
         		<div class="form-group">
-		    		<label for="ytvg_fname">First Name</label>
-	        		<input class="form-control" type="text" value="" name="ytvg_fname" id="ytvg_fname"/>
+		    		<span class="asterix">{{# if fnameReq }}* {{/if}}</span><label for="ytvg_fname">First Name</label>
+	        		<input data-parsley-required="{{fnameReq}}" data-parsley-group="block" data-parsley-type="alphanum" class="form-control" type="text" value="" name="ytvg_fname" id="ytvg_fname" placeholder="First Name" />
         		</div>
         		{{/if}}
-        		{{#if incLname}}
+        		{{#if incOptions.incLname}}
         		<div class="form-group">
-		    		<label for="ytvg_lname">Last Name</label>
-	        		<input class="form-control" type="text" value="" name="ytvg_lname" id="ytvg_lname"/>
+		    		<span class="asterix">{{# if lnameReq }}* {{/if}}</span><label for="ytvg_lname">Last Name</label>
+	        		<input data-parsley-required="{{lnameReq}}" data-parsley-group="block" data-parsley-type="alphanum" class="form-control" type="text" value="" name="ytvg_lname" id="ytvg_lname" placeholder="Last Name"/>
         		</div>
         		{{/if}}
-        		{{#if incCompany}}
+        		{{#if incOptions.incCompany}}
         		<div class="form-group">
-		    		<label for="ytvg_company">Company</label>
-	        		<input class="form-control" type="text" value="" name="ytvg_company" id="ytvg_company"/>
+		    		<span class="asterix">{{# if companyReq }}* {{/if}}</span><label for="ytvg_company">Company</label>
+	        		<input data-parsley-required="{{companyReq}}" data-parsley-group="block" data-parsley-type="alphanum" class="form-control" type="text" value="" name="ytvg_company" id="ytvg_company" placeholder="Company"/>
         		</div>
         		{{/if}}
-        		{{#if incAddress}}
+        		{{#if incOptions.incAddress}}
         		<div class="form-group">
-		    		<label for="ytvg_address">Address</label>
-	        		<input class="form-control" type="text" value="" name="ytvg_address" id="ytvg_address"/>
+		    		<span class="asterix">{{# if addressReq }}* {{/if}}</span><label for="ytvg_address">Address</label>
+	        		<input data-parsley-required="{{addressReq}}" data-parsley-type="alphanum" class="form-control" type="text" value="" name="ytvg_address" id="ytvg_address" placeholder="Address"/>
+        		</div> 
+        		{{/if}}
+        		<div class="form-inline form-group">
+        		<div class="form-group">
+		    		{{#if incOptions.incCity}}<span class="asterix">{{# if cityReq }}* {{/if}}</span><label for="ytvg_address">City</label>
+	        		<input data-parsley-required="{{cityReq}}" data-parsley-group="block" data-parsley-type="alphanum" class="form-control" type="text" value="" name="ytvg_city" id="ytvg_city" placeholder="City"/>{{/if}}
+	        	</div>
+                <div class="form-group">	
+                    {{#if incOptions.incState}}<span class="asterix">{{# if stateReq }}* {{/if}}</span><label for="ytvg_state">State</label>
+                    <input data-parsley-required="{{stateReq}}" data-parsley-group="block" class="form-control" type="text" value="" name="ytvg_state" id="ytvg_state" min="2" max="2" data-parsley-length="[2, 2]" placeholder="CA" />{{/if}}
+	        	</div>
+                <div class="form-group">	
+                    {{#if incOptions.incZip}}<span class="asterix">{{# if zipReq }}* {{/if}}</span><label for="ytvg_zip">Zip Code</label>
+	        		<input data-parsley-required="{{zipReq}}" data-parsley-group="block" data-parsley-type="alphanum" class="form-control" type="text" value="" name="ytvg_zip" id="ytvg_zip" placeholder="55555"/>{{/if}}
+        		</div>
+        		</div>
+        		{{#if incOptions.incEmail}}
+        		<div class="form-group">
+		    		<span class="asterix">{{# if emailReq }}* {{/if}}</span><label for="ytvg_email">Email</label>
+	        		<input data-parsley-required="{{emailReq}}" data-parsley-group="block" data-parsley-type="email" class="form-control" type="email" value="" name="ytvg_email" id="ytvg_email" placeholder="example@domain.com"/>
         		</div>
         		{{/if}}
-        		<div class="form-inline">
+        		{{#if incOptions.incPhone}}
         		<div class="form-group">
-		    		{{#if incCity}}<label for="ytvg_address">City</label>
-	        		<input class="form-control" type="text" value="" name="ytvg_city" id="ytvg_city"/>{{/if}}
-	        		{{#if incState}}<label for="ytvg_state">State</label>
-	        		<input class="form-control" type="text" value="" name="ytvg_state" id="ytvg_state" min="2" max="2" />{{/if}}
-	        		{{#if incZip}}<label for="ytvg_zip">Zip Code</label>
-	        		<input class="form-control" type="text" value="" name="ytvg_zip" id="ytvg_zip"/>{{/if}}
-        		</div>
-        		</div>
-        		{{#if incEmail}}
-        		<div class="form-group">
-		    		<label for="ytvg_email">Email</label>
-	        		<input class="form-control" type="email" value="" name="ytvg_email" id="ytvg_email"/>
+		    		<span class="asterix">{{# if phoneReq }}* {{/if}}</span><label for="ytvg_phone">Phone</label>
+	        		<input data-parsley-required="{{phoneReq}}" data-parsley-group="block" class="form-control" type="tel" value="" name="ytvg_phone" id="ytvg_phone" data-parsley-pattern="^(?:\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}$" placeholder="555-555-5555"/>
         		</div>
         		{{/if}}
-        		{{#if incPhone}}
-        		<div class="form-group">
-		    		<label for="ytvg_phone">Phone</label>
-	        		<input class="form-control" type="phone" value="" name="ytvg_phone" id="ytvg_phone"/>
-        		</div>
-        		{{/if}}
-        		<button class="btn btn-default" type="submit" id="submitform">Submit</button>
+        		<input class="btn btn-default" type="submit" id="submitform" value="Submit" />
         	</form>
         </div>
-        <a class="btn btn-primary" href="/widget/{{_id}}/edit">Edit Widget</a><a class="btn btn-default" href="/">New Widget</a>
+    </div>
 </template>
 
 
 <template name="edit_widget">
-	<form role="form">
+	{{>header}}
+	<div class="container">
+		<form role="form">
 		<input type="hidden" value="{{_id}}" id="vidID" />
-	  <div class="form-group">
-	    <label for="youtubeURL">YouTube URL</label>
-	    <input type="text" class="form-control" id="youtubeURL" name="youtubeURL" value="{{youtubeId}}" disabled>
-	  </div>
-	  <div class="form-group">
-	    <label for="vidgatemsg">Video Gating Message</label>
-	    <input type="text" class="form-control" id="vidgatemsg" name="vidgatemsg" value="{{msg}}">
-	  </div>
-	  <div class="form-group">
-	    <label for="vidgatemsg">Video Gate Time</label>
-	    <input type="text" class="form-control" id="stopAt" name="stopAt" value="{{stopAt}}">
-	  </div>
-	  <div class="form-group" id="vidgatefields">
-	    <label for="vidgatefields">Fields to collect</label>
-	    <label class="checkbox-inline">
-		  <input type="checkbox" id="inlineCheckbox1" value="fname"> First Name
-		</label>
-		<label class="checkbox-inline">
-		  <input type="checkbox" id="inlineCheckbox2" value="lname"> Last Name
-		</label>
-		<label class="checkbox-inline">
-		  <input type="checkbox" id="inlineCheckbox3" value="email"> Email
-		</label>
-		<label class="checkbox-inline">
-		  <input type="checkbox" id="inlineCheckbox4" value="company"> Company
-		</label>
-		<label class="checkbox-inline">
-		  <input type="checkbox" id="inlineCheckbox5" value="phone"> Phone
-		</label>
-		<label class="checkbox-inline">
-		  <input type="checkbox" id="inlineCheckbox6" value="address"> Address
-		</label>
-		<label class="checkbox-inline">
-		  <input type="checkbox" id="inlineCheckbox7" value="city"> City
-		</label>
-		<label class="checkbox-inline">
-		  <input type="checkbox" id="inlineCheckbox8" value="state"> State
-		</label>
-		<label class="checkbox-inline">
-		  <input type="checkbox" id="inlineCheckbox9" value="zip"> Zip Code
-		</label>
-	  </div>
-	  <button type="submit" class="btn btn-default submit" id="submitform">Submit</button>
-	</form>
+
+		<div id="ytplayer"></div>
+		<div class="form-group">
+	    	<label for="vidgatemsg">Video Gate Time</label>
+	    	<div class="slider"></div><div id="field"></div>
+	    	<input type="hidden" id="stopTime" name="stopTime" value="{{stopAt}}">
+	  	</div>
+
+		  <div class="form-group">
+		    <label for="youtubeURL">YouTube URL</label>
+		    <input type="text" class="form-control" id="youtubeURL" name="youtubeURL" value="{{youtubeId}}" disabled>
+		  </div>
+		  <div class="form-group">
+		    <label for="vidgatemsg">Video Gate Form Headline</label>
+		    <input type="text" class="form-control" id="vidgatemsg" name="vidgatemsg" value="{{msg}}">
+		  </div>
+
+		  <div class="form-group" id="vidgatefields">
+		    <label for="vidgatefields">Fields to collect</label>
+            <div>
+                  <input class="incField" type="checkbox" id="fname" value="fname"> First Name
+                  <span class="hidden"><input type="checkbox" value="FnameReq" id="fnameReq"> Required</span>
+                </div>
+                <div>
+                  <input class="incField" type="checkbox" id="lname" value="lname"> Last Name
+                  <span class="hidden"><input type="checkbox" value="lnameReq" id="lnameReq"> Required</span>
+                 </div>
+                <div>
+                  <input class="incField" type="checkbox" id="email" value="email"> Email
+                  <span class="hidden"><input type="checkbox" value="emailReq" id="emailReq"> Required</span>
+                </div>
+                <div>
+                  <input class="incField" type="checkbox" id="company" value="company"> Company
+                  <span class="hidden"><input type="checkbox" value="companyReq" id="companyReq"> Required</span>
+                </div>
+                <div>
+                  <input class="incField" type="checkbox" id="phone" value="phone"> Phone
+                  <span class="hidden"> <input type="checkbox" value="phoneReq" id="phoneReq"> Required</span>
+                </div>
+               <div>
+                  <input class="incField" type="checkbox" id="address" value="address"> Address
+                  <span class="hidden"> <input type="checkbox" value="addressReq" id="addressReq"> Required</span>
+                </div>
+                <div>
+                 <input class="incField" type="checkbox" id="city" value="city"> City
+                 <span class="hidden"><input type="checkbox" value="cityReq" id="cityReq"> Required</span>
+               </div>
+               <div>
+                  <input class="incField" type="checkbox" id="state" value="state"> State
+                  <span class="hidden"><input type="checkbox" value="stateReq" id="stateReq"> Required</span>
+                </div>
+                <div>
+                  <input class="incField" type="checkbox" id="zip" value="zip"> Zip Code
+                  <span class="hidden"><input type="checkbox" value="zipReq" id="zipReq"> Required</span>
+                </div>
+		  </div>
+	  	<button type="submit" class="btn btn-default submit" id="submitform">Submit</button>
+		</form>
+	</div>
 </template>
 
 <template name="ytapi">
@@ -208,7 +274,7 @@
 	<script>
 			var ytid = $('#ytid').text();
 			var ytstopAt = $('#stopAt').text();
-			var player = undefined;
+			var player;
 
 			var tag = document.createElement('script');
 		    tag.src = "//www.youtube.com/iframe_api";
@@ -234,10 +300,7 @@
 		        var len = player.getDuration();
 		      }
 		      var done = false;
-	          //TODO: also show form if they haven't filled it out, even if after the stop time.
-	          //set a cookie and if cookie is not set, then force player back to stopAt time and pause.
-	          //when form is submitted, resume video and remove form.
-	          //player.loadVideoById(videoId:String, startSeconds:Number, suggestedQuality:String):Void
+
 	          function onPlayerStateChange(event) {
 	            	var stop = ytstopAt * 1000;
 	              	var currentTime = player.getCurrentTime();

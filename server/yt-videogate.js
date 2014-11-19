@@ -15,21 +15,15 @@ YouTubeUrl = new Meteor.Collection("youtubeurl");
 
 
 Meteor.methods({
-  enterYTURL : function(youtubeId, msg, incFname, incLname, incEmail, incCompany, incPhone, incAddress, incCity, incState, incZip ){
+ // enterYTURL : function(youtubeId, msg, incFname, incLname, incEmail, incCompany, incPhone, incAddress, incCity, incState, incZip ){
+  enterYTURL : function(youtubeId, msg, incOptions, reqOptions ){
     console.log('entering youtube url');
     var preferenceId = YouTubeUrl.insert({
           youtubeId : youtubeId,
           date: new Date(),
           msg: msg,
-          incFname: incFname,
-          incLname: incLname,
-          incEmail: incEmail,
-          incCompany: incCompany,
-          incPhone: incPhone,
-          incAddress: incAddress,
-          incCity: incCity,
-          incState: incState,
-          incZip: incZip,
+          incOptions: incOptions,
+          reqOptions: reqOptions,
           stopAt: 0,
           lead: {
 	          	email: '',
@@ -50,10 +44,12 @@ Meteor.methods({
       {$push: {'lead': {'email': email, 'date': new Date()} } }
     );
   },
-  editForm: function(id, msg, stopAt, incFname, incLname, incEmail, incCompany, incPhone, incAddress, incCity, incState, incZip ) {
+  //editForm: function(id, msg, stopAt, incFname, incLname, incEmail, incCompany, incPhone, incAddress, incCity, incState, incZip ) {
+    editForm: function(id, msg, stopAt, incOptions, reqOptions ) {
   	YouTubeUrl.update(
       {_id: id},
-      {$set: {'msg': msg, 'stopAt': stopAt, 'incFname': incFname, 'incLname': incLname, 'incEmail': incEmail, 'incCompany': incCompany, 'incPhone': incCompany, 'incAddress': incAddress, 'incCity': incCity, 'incState': incState, 'incZip': incZip}}
+      //{$set: {'msg': msg, 'stopAt': stopAt, 'incFname': incFname, 'incLname': incLname, 'incEmail': incEmail, 'incCompany': incCompany, 'incPhone': incCompany, 'incAddress': incAddress, 'incCity': incCity, 'incState': incState, 'incZip': incZip}}
+      {$set: {'msg': msg, 'stopAt': stopAt, 'incOptions': incOptions, 'reqOptions': reqOptions}}
     );
   }
 });

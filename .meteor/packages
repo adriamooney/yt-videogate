@@ -11,4 +11,6 @@ iron:router
 mrt:cookies
 aldeed:autoform
 aldeed:collection2
+amr:parsley.js
+less
 
