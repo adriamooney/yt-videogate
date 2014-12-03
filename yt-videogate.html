@@ -20,11 +20,7 @@
             </button>
             <a class="navbar-brand" href="#">YouTube Video Gate Generator</a>
           </div>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="#">About</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
+
         </div><!--/.container-fluid -->
       </nav>
 </template>
@@ -41,62 +37,84 @@
 
 
 <template name="youtubeURLForm">
-	<form role="form" id="configure-form">
-	  <div class="form-group">
-	    <label for="youtubeURL">YouTube URL</label>
-	    <input type="text" class="form-control" id="youtubeURL" name="youtubeURL" placeholder="Enter YouTube URL">
-	  </div>
-	  <div class="form-group">
-	    <label for="vidgatemsg">Video Gate Form Headline</label>
-	    <input type="text" class="form-control" id="vidgatemsg" name="vidgatemsg" placeholder="Message for your Video Gate">
-	  </div>
-	  <div class="form-group" id="vidgatefields">
-	    <label for="vidgatefields">Fields to collect</label>
-	   	<div>
-		  <input class="incField" type="checkbox" id="fname" value="fname"> First Name
-		  <span class="hidden"><input type="checkbox" value="fnameReq" id="fnameReq"> Required</span>
-		</div>
-		<div>
-		  <input class="incField" type="checkbox" id="lname" value="lname"> Last Name
-		  <span class="hidden"><input type="checkbox" value="lnameReq" id="lnameReq"> Required</span>
-		 </div>
-		<div>
-		  <input class="incField" type="checkbox" id="email" value="email"> Email
-		  <span class="hidden"><input type="checkbox" value="emailReq" id="emailReq"> Required</span>
+	<form id="configure-form" name="configure-form">
+        <div class="form-group">
+            <label for="youtubeURL">YouTube URL</label> <input class="form-control"
+            id="youtubeURL" name="youtubeURL" placeholder="Enter YouTube URL" type=
+            "text">
         </div>
-        <div>
-		  <input class="incField" type="checkbox" id="company" value="company"> Company
-		  <span class="hidden"><input type="checkbox" value="companyReq" id="companyReq"> Required</span>
+
+        <div class="form-group">
+            <label for="vidgatemsg">Video Gate Form Headline</label> <input class=
+            "form-control" id="vidgatemsg" name="vidgatemsg" placeholder=
+            "Message for your Video Gate" type="text">
         </div>
-		<div>
-		  <input class="incField" type="checkbox" id="phone" value="phone"> Phone
-		  <span class="hidden"> <input type="checkbox" value="phoneReq" id="phoneReq"> Required</span>
+
+        <div class="form-group" id="vidgatefields">
+            <label for="vidgatefields">Fields to collect</label>
+
+            <div>
+                <input class="incField" id="fname" type="checkbox" value="fname">
+                First Name <span class="hidden"><input id="fnameReq" type=
+                "checkbox" value="fnameReq"> Required</span>
+            </div>
+
+            <div>
+                <input class="incField" id="lname" type="checkbox" value="lname">
+                Last Name <span class="hidden"><input id="lnameReq" type="checkbox"
+                value="lnameReq"> Required</span>
+            </div>
+
+            <div>
+                <input class="incField" id="email" type="checkbox" value="email">
+                Email <span class="hidden"><input id="emailReq" type="checkbox"
+                value="emailReq"> Required</span>
+            </div>
+
+            <div>
+                <input class="incField" id="company" type="checkbox" value=
+                "company"> Company <span class="hidden"><input id="companyReq"
+                type="checkbox" value="companyReq"> Required</span>
+            </div>
+
+            <div>
+                <input class="incField" id="phone" type="checkbox" value="phone">
+                Phone <span class="hidden"><input id="phoneReq" type="checkbox"
+                value="phoneReq"> Required</span>
+            </div>
+
+            <div>
+                <input class="incField" id="address" type="checkbox" value=
+                "address"> Address <span class="hidden"><input id="addressReq"
+                type="checkbox" value="addressReq"> Required</span>
+            </div>
+
+            <div>
+                <input class="incField" id="city" type="checkbox" value="city">
+                City <span class="hidden"><input id="cityReq" type="checkbox"
+                value="cityReq"> Required</span>
+            </div>
+
+            <div>
+                <input class="incField" id="state" type="checkbox" value="state">
+                State <span class="hidden"><input id="stateReq" type="checkbox"
+                value="stateReq"> Required</span>
+            </div>
+
+            <div>
+                <input class="incField" id="zip" type="checkbox" value="zip"> Zip
+                Code <span class="hidden"><input id="zipReq" type="checkbox" value=
+                "zipReq"> Required</span>
+            </div>
         </div>
-	   <div>
-		  <input class="incField" type="checkbox" id="address" value="address"> Address
-		  <span class="hidden"> <input type="checkbox" value="addressReq" id="addressReq"> Required</span>
-		</div>
-        <div>
-		 <input class="incField" type="checkbox" id="city" value="city"> City
-		 <span class="hidden"><input type="checkbox" value="cityReq" id="cityReq"> Required</span>
-	   </div>
-       <div>
-		  <input class="incField" type="checkbox" id="state" value="state"> State
-		  <span class="hidden"><input type="checkbox" value="stateReq" id="stateReq"> Required</span>
-        </div>
-        <div>
-		  <input class="incField" type="checkbox" id="zip" value="zip"> Zip Code
-		  <span class="hidden"><input type="checkbox" value="zipReq" id="zipReq"> Required</span>
-        </div>
-	  </div>
-	  <button type="submit" class="btn btn-default submit">Submit</button>
-	</form>
+        <button class="btn btn-default submit" type="submit">Submit</button>
+    </form>
 </template>
 
 <template name="youtubeurl">
 	<div style="display:none">
-		<span id="pref-{{_id}}"><span id="ytid">{{youtubeId}}</span>, <span id="stopAt">{{stopAt}}</span> {{date}}</span>
-		<span id="vd-gt-msg">{{msg}}</span>
+        <span id="pref-{{_id}}"><span id="ytid">{{youtubeId}}</span>, <span id="stopAt">{{stopAt}}</span> {{date}}</span>
+        <span id="vd-gt-msg">{{msg}}</span>
 	</div>
 </template>
 
@@ -134,8 +152,11 @@
 	<div class="container">
 		{{>widget}}
 		<input type="hidden" value="{{_id}}" id="vidID">
-	 	<a class="btn btn-primary" href="/widget/{{_id}}/edit" id="edit-widget">Edit Widget</a><a class="btn btn-default" href="#" id="new-widget">New Widget</a>
-	</div>
+	 	<div class="btn-row container">
+            <button class="btn btn-primary" id="edit-widget">Edit Widget</button>
+            <button class="btn btn-default" id="new-widget">New Widget</button>
+	   </div>
+    </div>
 </template>
 
 <template name="widget">
@@ -149,51 +170,51 @@
         		{{#if incOptions.incFname}}
         		<div class="form-group">
 		    		<span class="asterix">{{# if fnameReq }}* {{/if}}</span><label for="ytvg_fname">First Name</label>
-	        		<input data-parsley-required="{{fnameReq}}" data-parsley-group="block" data-parsley-type="alphanum" class="form-control" type="text" value="" name="ytvg_fname" id="ytvg_fname" placeholder="First Name" />
+	        		<input data-parsley-required="{{fnameReq}}" data-parsley-group="block" data-parsley-type="alphanum" class="form-control" type="text" value="" name="fname" id="ytvg_fname" placeholder="First Name" />
         		</div>
         		{{/if}}
         		{{#if incOptions.incLname}}
         		<div class="form-group">
 		    		<span class="asterix">{{# if lnameReq }}* {{/if}}</span><label for="ytvg_lname">Last Name</label>
-	        		<input data-parsley-required="{{lnameReq}}" data-parsley-group="block" data-parsley-type="alphanum" class="form-control" type="text" value="" name="ytvg_lname" id="ytvg_lname" placeholder="Last Name"/>
+	        		<input data-parsley-required="{{lnameReq}}" data-parsley-group="block" data-parsley-type="alphanum" class="form-control" type="text" value="" name="lname" id="ytvg_lname" placeholder="Last Name"/>
         		</div>
         		{{/if}}
         		{{#if incOptions.incCompany}}
         		<div class="form-group">
 		    		<span class="asterix">{{# if companyReq }}* {{/if}}</span><label for="ytvg_company">Company</label>
-	        		<input data-parsley-required="{{companyReq}}" data-parsley-group="block" data-parsley-type="alphanum" class="form-control" type="text" value="" name="ytvg_company" id="ytvg_company" placeholder="Company"/>
+	        		<input data-parsley-required="{{companyReq}}" data-parsley-group="block" data-parsley-type="alphanum" class="form-control" type="text" value="" name="company" id="ytvg_company" placeholder="Company"/>
         		</div>
         		{{/if}}
         		{{#if incOptions.incAddress}}
         		<div class="form-group">
 		    		<span class="asterix">{{# if addressReq }}* {{/if}}</span><label for="ytvg_address">Address</label>
-	        		<input data-parsley-required="{{addressReq}}" data-parsley-type="alphanum" class="form-control" type="text" value="" name="ytvg_address" id="ytvg_address" placeholder="Address"/>
+	        		<input data-parsley-required="{{addressReq}}" data-parsley-type="alphanum" class="form-control" type="text" value="" name="address" id="ytvg_address" placeholder="Address"/>
         		</div> 
         		{{/if}}
         		<div class="form-inline form-group">
         		<div class="form-group">
 		    		{{#if incOptions.incCity}}<span class="asterix">{{# if cityReq }}* {{/if}}</span><label for="ytvg_address">City</label>
-	        		<input data-parsley-required="{{cityReq}}" data-parsley-group="block" data-parsley-type="alphanum" class="form-control" type="text" value="" name="ytvg_city" id="ytvg_city" placeholder="City"/>{{/if}}
+	        		<input data-parsley-required="{{cityReq}}" data-parsley-group="block" data-parsley-type="alphanum" class="form-control" type="text" value="" name="city" id="ytvg_city" placeholder="City"/>{{/if}}
 	        	</div>
                 <div class="form-group">	
                     {{#if incOptions.incState}}<span class="asterix">{{# if stateReq }}* {{/if}}</span><label for="ytvg_state">State</label>
-                    <input data-parsley-required="{{stateReq}}" data-parsley-group="block" class="form-control" type="text" value="" name="ytvg_state" id="ytvg_state" min="2" max="2" data-parsley-length="[2, 2]" placeholder="CA" />{{/if}}
+                    <input data-parsley-required="{{stateReq}}" data-parsley-group="block" class="form-control" type="text" value="" name="ytvg_state" id="state" min="2" max="2" data-parsley-length="[2, 2]" placeholder="CA" />{{/if}}
 	        	</div>
                 <div class="form-group">	
                     {{#if incOptions.incZip}}<span class="asterix">{{# if zipReq }}* {{/if}}</span><label for="ytvg_zip">Zip Code</label>
-	        		<input data-parsley-required="{{zipReq}}" data-parsley-group="block" data-parsley-type="alphanum" class="form-control" type="text" value="" name="ytvg_zip" id="ytvg_zip" placeholder="55555"/>{{/if}}
+	        		<input data-parsley-required="{{zipReq}}" data-parsley-group="block" data-parsley-type="alphanum" class="form-control" type="text" value="" name="zip" id="ytvg_zip" placeholder="55555"/>{{/if}}
         		</div>
         		</div>
         		{{#if incOptions.incEmail}}
         		<div class="form-group">
 		    		<span class="asterix">{{# if emailReq }}* {{/if}}</span><label for="ytvg_email">Email</label>
-	        		<input data-parsley-required="{{emailReq}}" data-parsley-group="block" data-parsley-type="email" class="form-control" type="email" value="" name="ytvg_email" id="ytvg_email" placeholder="example@domain.com"/>
+	        		<input data-parsley-required="{{emailReq}}" data-parsley-group="block" data-parsley-type="email" class="form-control" type="email" value="" name="email" id="ytvg_email" placeholder="example@domain.com"/>
         		</div>
         		{{/if}}
         		{{#if incOptions.incPhone}}
         		<div class="form-group">
 		    		<span class="asterix">{{# if phoneReq }}* {{/if}}</span><label for="ytvg_phone">Phone</label>
-	        		<input data-parsley-required="{{phoneReq}}" data-parsley-group="block" class="form-control" type="tel" value="" name="ytvg_phone" id="ytvg_phone" data-parsley-pattern="^(?:\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}$" placeholder="555-555-5555"/>
+	        		<input data-parsley-required="{{phoneReq}}" data-parsley-group="block" class="form-control" type="tel" value="" name="phone" id="ytvg_phone" data-parsley-pattern="^(?:\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}$" placeholder="555-555-5555"/>
         		</div>
         		{{/if}}
         		<input class="btn btn-default" type="submit" id="submitform" value="Submit" />
@@ -206,66 +227,92 @@
 <template name="edit_widget">
 	{{>header}}
 	<div class="container">
-		<form role="form">
-		<input type="hidden" value="{{_id}}" id="vidID" />
+		<form>
+            <input id="vidID" type="hidden" value="{{_id}}">
 
-		<div id="ytplayer"></div>
-		<div class="form-group">
-	    	<label for="vidgatemsg">Video Gate Time</label>
-	    	<div class="slider"></div><div id="field"></div>
-	    	<input type="hidden" id="stopTime" name="stopTime" value="{{stopAt}}">
-	  	</div>
+            <div id="ytplayer"></div>
 
-		  <div class="form-group">
-		    <label for="youtubeURL">YouTube URL</label>
-		    <input type="text" class="form-control" id="youtubeURL" name="youtubeURL" value="{{youtubeId}}" disabled>
-		  </div>
-		  <div class="form-group">
-		    <label for="vidgatemsg">Video Gate Form Headline</label>
-		    <input type="text" class="form-control" id="vidgatemsg" name="vidgatemsg" value="{{msg}}">
-		  </div>
+            <div class="form-group">
+                <label for="vidgatemsg">Video Gate Time</label>
 
-		  <div class="form-group" id="vidgatefields">
-		    <label for="vidgatefields">Fields to collect</label>
-            <div>
-                  <input class="incField" type="checkbox" id="fname" value="fname"> First Name
-                  <span class="hidden"><input type="checkbox" value="FnameReq" id="fnameReq"> Required</span>
-                </div>
+                <div class="slider"></div>
+
+                <div id="field"></div><input id="stopTime" name="stopTime" type=
+                "hidden" value="{{stopAt}}">
+            </div>
+
+            <div class="form-group">
+                <label for="youtubeURL">YouTube URL</label> <input class="form-control"
+                disabled id="youtubeURL" name="youtubeURL" type="text" value=
+                "{{youtubeId}}">
+            </div>
+
+            <div class="form-group">
+                <label for="vidgatemsg">Video Gate Form Headline</label> <input class=
+                "form-control" id="vidgatemsg" name="vidgatemsg" type="text" value=
+                "{{msg}}">
+            </div>
+
+            <div class="form-group" id="vidgatefields">
+                <label for="vidgatefields">Fields to Collect</label>
+
                 <div>
-                  <input class="incField" type="checkbox" id="lname" value="lname"> Last Name
-                  <span class="hidden"><input type="checkbox" value="lnameReq" id="lnameReq"> Required</span>
-                 </div>
+                    <input class="incField" id="fname" type="checkbox" value="fname">
+                    First Name <span class="hidden"><input id="fnameReq" type=
+                    "checkbox" value="FnameReq"> Required</span>
+                </div>
+
                 <div>
-                  <input class="incField" type="checkbox" id="email" value="email"> Email
-                  <span class="hidden"><input type="checkbox" value="emailReq" id="emailReq"> Required</span>
+                    <input class="incField" id="lname" type="checkbox" value="lname">
+                    Last Name <span class="hidden"><input id="lnameReq" type="checkbox"
+                    value="lnameReq"> Required</span>
                 </div>
+
                 <div>
-                  <input class="incField" type="checkbox" id="company" value="company"> Company
-                  <span class="hidden"><input type="checkbox" value="companyReq" id="companyReq"> Required</span>
+                    <input class="incField" id="email" type="checkbox" value="email">
+                    Email <span class="hidden"><input id="emailReq" type="checkbox"
+                    value="emailReq"> Required</span>
                 </div>
+
                 <div>
-                  <input class="incField" type="checkbox" id="phone" value="phone"> Phone
-                  <span class="hidden"> <input type="checkbox" value="phoneReq" id="phoneReq"> Required</span>
+                    <input class="incField" id="company" type="checkbox" value=
+                    "company"> Company <span class="hidden"><input id="companyReq"
+                    type="checkbox" value="companyReq"> Required</span>
                 </div>
-               <div>
-                  <input class="incField" type="checkbox" id="address" value="address"> Address
-                  <span class="hidden"> <input type="checkbox" value="addressReq" id="addressReq"> Required</span>
-                </div>
+
                 <div>
-                 <input class="incField" type="checkbox" id="city" value="city"> City
-                 <span class="hidden"><input type="checkbox" value="cityReq" id="cityReq"> Required</span>
-               </div>
-               <div>
-                  <input class="incField" type="checkbox" id="state" value="state"> State
-                  <span class="hidden"><input type="checkbox" value="stateReq" id="stateReq"> Required</span>
+                    <input class="incField" id="phone" type="checkbox" value="phone">
+                    Phone <span class="hidden"><input id="phoneReq" type="checkbox"
+                    value="phoneReq"> Required</span>
                 </div>
+
                 <div>
-                  <input class="incField" type="checkbox" id="zip" value="zip"> Zip Code
-                  <span class="hidden"><input type="checkbox" value="zipReq" id="zipReq"> Required</span>
+                    <input class="incField" id="address" type="checkbox" value=
+                    "address"> Address <span class="hidden"><input id="addressReq"
+                    type="checkbox" value="addressReq"> Required</span>
                 </div>
-		  </div>
-	  	<button type="submit" class="btn btn-default submit" id="submitform">Submit</button>
-		</form>
+
+                <div>
+                    <input class="incField" id="city" type="checkbox" value="city">
+                    City <span class="hidden"><input id="cityReq" type="checkbox"
+                    value="cityReq"> Required</span>
+                </div>
+
+                <div>
+                    <input class="incField" id="state" type="checkbox" value="state">
+                    State <span class="hidden"><input id="stateReq" type="checkbox"
+                    value="stateReq"> Required</span>
+                </div>
+
+                <div>
+                    <input class="incField" id="zip" type="checkbox" value="zip"> Zip
+                    Code <span class="hidden"><input id="zipReq" type="checkbox" value=
+                    "zipReq"> Required</span>
+                </div>
+            </div>
+            <button class="btn btn-default submit" id="submitform" type=
+            "submit">Submit</button>
+        </form>
 	</div>
 </template>
 

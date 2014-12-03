@@ -2,7 +2,7 @@ YouTubeUrl = new Meteor.Collection("youtubeurl");
 
 Meteor.subscribe("youtubeurl");
 
-
+/* ROUTES */
 Router.route('/', function () {
   this.render('Home');
 });
@@ -34,8 +34,7 @@ Router.route('/widget/:_id/edit', function () {
 
 }); 
 
-//UI.insert(UI.render(Template.gateTime), $('#gate-time-configure').get(0) );
-
+/* RENDERED */
 Template.widget.rendered = function () {
   setTimeout(function(){
     
@@ -52,14 +51,11 @@ Template.widget.rendered = function () {
 
 
   }, 1000);
-
-  // Setup parsley form validation
-  // replace form with the id of your form
   
 };
 
 Template.edit_widget.rendered = function () {
-  //render slider and player
+
   //TODO: how to reuse functions from Template.youtubeURLForm.events. This is dupliate code
   
   setTimeout(function(){var id = $('#youtubeURL').val();newVideo(id)}, 1000);
@@ -127,6 +123,7 @@ Template.edit_widget.rendered = function () {
         } 
 
 };
+/* EVENTS */
 
 Template.header.events({
   'click .navbar-brand': function(e) {
@@ -136,226 +133,11 @@ Template.header.events({
   }
 });
 
-Template.preview_widget.events({
-  'click #new-widget': function(e) {
-    e.preventDefault();
-    Router.go('/');
-    setTimeout(function(){window.location.reload()}, 1000);
-  },
-  'click #edit-widget': function(e) {
-    e.preventDefault();
-    var id = $('#vidID').val();
-    Router.go('/widget/'+id+'/edit');
-    setTimeout(function(){window.location.reload()}, 1000);
-  }
-
-});
-
-Template.widget.helpers ({
-    fnameReq: function() {
-        return this.reqOptions.incFnameReq;
-    },
-    lnameReq: function() {
-        return this.reqOptions.incLnameReq;
-    },
-    emailReq: function() {
-        return this.reqOptions.incEmailReq;
-    },
-    companyReq: function() {
-        return this.reqOptions.incCompanyReq;
-    },
-    addressReq: function() {
-        return this.reqOptions.incAddressReq;
-    },
-    cityReq: function() {
-        return this.reqOptions.incCityReq;
-    },
-    stateReq: function() {
-        return this.reqOptions.incStateReq;
-    },
-    zipReq: function() {
-        return this.reqOptions.incZipReq;
-    },
-    phoneReq: function() {
-        return this.reqOptions.incPhoneReq;
-    }
-});
-
-Template.widget.events({
-  'submit #vg-widget-form': function (e) {
-    e.preventDefault();
-    //only set cookie if form is filled out correctly
-
-        var email = $('#ytvg_email').val();
-        //TODO: turn all field values into an object
-        if ( $('#vg-widget-form').parsley().isValid() ) {
-        
-
-           Meteor.call("submitForm",email, this._id, function() {
-            Cookie.set('yt-vidgate', 'yt-vidgate-unlocked');
-            $('#vg-widget-form').remove();
-          }); 
-
-
-        }
-
-
-    setTimeout(function(){
-      player.playVideo(); //firefox bug is here.
-
-    }, 3000);
-  }
-
-});
-
-Template.edit_widget.helpers({
-    isChecked: function(context) {
-    return this.context;
-    //why doesn't this work?
-    },
-    isCheckedFname: function() {
-    return this.incFname;
-    },
-    isCheckdedLname: function() {
-    return this.incLname;
-
-    },
-    isCheckdedEmail: function() {
-    return this.incEmail;
-    },
-    isCheckedCompany: function() {
-    return this.incCompany;
-    },
-    isCheckedPhone: function() {
-    return this.incPhone;
-    },
-    isCheckedAddress: function() {
-    return this.incAddress;
-    },
-    isCheckedCity: function() {
-    return this.incCity;
-    },
-    isCheckedState: function() {
-    return this.incState;
-    },
-    isCheckedZip: function() {
-    return this.incZip;
-    }
-
-});
-
-Template.edit_widget.events({
-    'change .incField': function(e) {
-      var a = e.currentTarget.nextElementSibling;
-      var field = e.currentTarget;
-      if ( $(field).is(':checked') ) {
-        $(a).removeClass('hidden');
-      }
-      else {
-         $(a).addClass('hidden');
-      }
-      //$(a).toggleClass('hidden');
-      console.log(e.currentTarget);
-    },
-    'click #submitform': function (e) {
-    e.preventDefault();
-    var id = document.getElementById("vidID").value;
-    var msg = document.getElementById("vidgatemsg").value;
-    //var stopAt = document.getElementById("stopAt").value;
-    
-    function hmsToSecondsOnly(str) {
-        var p = str.split(':'),
-            s = 0, m = 1;
-
-        while (p.length > 0) {
-            s += m * parseInt(p.pop(), 10);
-            m *= 60;
-        }
-
-        return s;
-    }
-    var val = $('.slider').val();
-    var stopAt = hmsToSecondsOnly(val);
-
-    /*var checkedValues = $('#vidgatefields input:checkbox').map(function() {
-        if( $(this).is(":checked") ) {
-          return true;
-        }
-        else {
-          return false;
-        }
-    }).get(); */
-
-    var incFname = document.getElementById('fname').checked;
-    var incLname = document.getElementById('lname').checked;
-    var incEmail = document.getElementById('email').checked;
-    var incCompany= document.getElementById('company').checked;
-    var incPhone= document.getElementById('phone').checked;
-    var incAddress= document.getElementById('address').checked;
-    var incCity= document.getElementById('city').checked;
-    var incState= document.getElementById('state').checked;
-    var incZip= document.getElementById('zip').checked;
-
-    var incOpts = {
-          incFname: incFname,
-          incLname: incLname,
-          incEmail: incEmail,
-          incCompany: incCompany,
-          incPhone: incPhone,
-          incAddress: incAddress,
-          incCity: incCity,
-          incState: incState,
-          incZip: incZip
-        };
-
-    var incFnameReq = document.getElementById('fnameReq').checked;
-    var incLnameReq = document.getElementById('lnameReq').checked;
-    var incEmailReq = document.getElementById('emailReq').checked;
-    var incCompanyReq= document.getElementById('companyReq').checked;
-    var incPhoneReq= document.getElementById('phoneReq').checked;
-    var incAddressReq= document.getElementById('addressReq').checked;
-    var incCityReq= document.getElementById('cityReq').checked;
-    var incStateReq= document.getElementById('stateReq').checked;
-    var incZipReq= document.getElementById('zipReq').checked;
-
-    var reqOpts = {
-      incFnameReq: incFnameReq,
-      incLnameReq: incLnameReq,
-      incEmailReq: incEmailReq,
-      incCompanyReq: incCompanyReq,
-      incPhoneReq: incPhoneReq,
-      incAddressReq: incAddressReq,
-      incCityReq: incCityReq,
-      incStateReq: incStateReq,
-      incZipReq: incZipReq
-    };
-
-    //Meteor.call("videoGateTime",hmsToSecondsOnly(val), this._id);
-    //console.log(checkedValues[0], checkedValues[1], checkedValues[2], checkedValues[3], checkedValues[4], checkedValues[5], checkedValues[6], checkedValues[7], checkedValues[8]);
-
-    console.log(incOpts);
-
-    Meteor.call("editForm", id, msg, stopAt, incOpts, reqOpts, function(error , preferenceId){
-          console.log('edited form');
-          Router.go('/widget/'+id+'/preview');
-          
-          setTimeout(function(){window.location.reload()}, 1000);
-    });
-
-  }
-});
- 
-Template.youtubeurls.items = function(){
-    return YouTubeUrl.find( {},{sort: {date: -1}, limit: 1} );
-};
-
-
-
-  Template.youtubeurls.events({
+Template.youtubeurls.events({
     'click .save': function(event) {
       var val = $('.slider').val();
 
-      //reuse this function. where to put i?
+      //reuse this function. where to put it?
       function hmsToSecondsOnly(str) {
         var p = str.split(':'),
             s = 0, m = 1;
@@ -391,19 +173,15 @@ Template.youtubeurls.items = function(){
       setTimeout(function(){window.location.reload()}, 1000);
     }
 
-  });
+});
 
-  Template.youtubeURLForm.events({
+Template.youtubeURLForm.events({
     'change .incField': function(e) {
       var a = e.currentTarget.nextElementSibling;
       //var req = e.currentTarget.parentElement.nextElementSibling.nextElementSibling;
       var field = e.currentTarget;
       $(a).toggleClass('hidden');
       console.log(e.currentTarget);
-      //uncheck required 
-      /*if(!$(field).is(':checked')) {
-        $(req).removeAttr('checked');
-      } */
 
     },
     'click .submit' : function(event){
@@ -413,21 +191,6 @@ Template.youtubeurls.items = function(){
         var youtubeURL = spl[1];
         var msg = document.getElementById("vidgatemsg").value;
 
-
-        /*var checkedValues = $('#vidgatefields .incField').map(function() {
-            if( $(this).is(":checked") ) {
-              $(this).val() == 'true';  //needs to be boolean not string
-              document.getElementById(this).checked;
-              return true;
-            }
-            else {
-              $(this).val() == 'false';
-              return false;
-            }
-        }).get(); */
-
-        //TODO: add validation before this is called
-        //TODO: pass as options instead of parameters.  checkedValues shouldn't be dependent on order
 
         var incFname = document.getElementById('fname').checked;
         var incLname = document.getElementById('lname').checked;
@@ -528,9 +291,6 @@ Template.youtubeurls.items = function(){
           var len = player.getDuration();
           console.log(len);
 
-          
-          //UI.insert(UI.render(Template.gateTime), $('#gate-time-configure').get(0) );
-
 
           $('.slider').noUiSlider({
             start: [ 0 ],
@@ -566,6 +326,232 @@ Template.youtubeurls.items = function(){
  
     }
 });
+
+Template.preview_widget.events({
+  'click #new-widget': function(e) {
+    e.preventDefault();
+    Router.go('/');
+    setTimeout(function(){window.location.reload()}, 1000);
+  },
+  'click #edit-widget': function(e) {
+    e.preventDefault();
+    var id = $('#vidID').val();
+    Router.go('/widget/'+id+'/edit');
+    setTimeout(function(){window.location.reload()}, 1000);
+  }
+
+});
+
+Template.widget.events({
+  'submit #vg-widget-form': function (e) {
+    e.preventDefault();
+    //only set cookie if form is filled out correctly
+
+        var email = $('#ytvg_email').val();
+        var a = $('#vg-widget-form').serializeObject();
+        console.log(a);
+        
+        if ( $('#vg-widget-form').parsley().isValid() ) {
+        
+            //TODO: turn all field values into an object (a above)
+           Meteor.call("submitForm",email, this._id, function() {
+            Cookie.set('yt-vidgate', 'yt-vidgate-unlocked');
+            $('#vg-widget-form').remove();
+          }); 
+
+
+        }
+
+    setTimeout(function(){
+      player.playVideo(); //firefox bug is here.
+
+    }, 3000);
+  }
+
+});
+
+Template.edit_widget.events({
+    'change .incField': function(e) {
+      var a = e.currentTarget.nextElementSibling;
+      var field = e.currentTarget;
+      if ( $(field).is(':checked') ) {
+        $(a).removeClass('hidden');
+      }
+      else {
+         $(a).addClass('hidden');
+      }
+      //$(a).toggleClass('hidden');
+      console.log(e.currentTarget);
+    },
+    'click #submitform': function (e) {
+    e.preventDefault();
+    var id = document.getElementById("vidID").value;
+    var msg = document.getElementById("vidgatemsg").value;
+    //var stopAt = document.getElementById("stopAt").value;
+    
+    function hmsToSecondsOnly(str) {
+        var p = str.split(':'),
+            s = 0, m = 1;
+
+        while (p.length > 0) {
+            s += m * parseInt(p.pop(), 10);
+            m *= 60;
+        }
+
+        return s;
+    }
+    var val = $('.slider').val();
+    var stopAt = hmsToSecondsOnly(val);
+
+
+    var incFname = document.getElementById('fname').checked;
+    var incLname = document.getElementById('lname').checked;
+    var incEmail = document.getElementById('email').checked;
+    var incCompany= document.getElementById('company').checked;
+    var incPhone= document.getElementById('phone').checked;
+    var incAddress= document.getElementById('address').checked;
+    var incCity= document.getElementById('city').checked;
+    var incState= document.getElementById('state').checked;
+    var incZip= document.getElementById('zip').checked;
+
+    var incOpts = {
+          incFname: incFname,
+          incLname: incLname,
+          incEmail: incEmail,
+          incCompany: incCompany,
+          incPhone: incPhone,
+          incAddress: incAddress,
+          incCity: incCity,
+          incState: incState,
+          incZip: incZip
+        };
+
+    var incFnameReq = document.getElementById('fnameReq').checked;
+    var incLnameReq = document.getElementById('lnameReq').checked;
+    var incEmailReq = document.getElementById('emailReq').checked;
+    var incCompanyReq= document.getElementById('companyReq').checked;
+    var incPhoneReq= document.getElementById('phoneReq').checked;
+    var incAddressReq= document.getElementById('addressReq').checked;
+    var incCityReq= document.getElementById('cityReq').checked;
+    var incStateReq= document.getElementById('stateReq').checked;
+    var incZipReq= document.getElementById('zipReq').checked;
+
+    var reqOpts = {
+      incFnameReq: incFnameReq,
+      incLnameReq: incLnameReq,
+      incEmailReq: incEmailReq,
+      incCompanyReq: incCompanyReq,
+      incPhoneReq: incPhoneReq,
+      incAddressReq: incAddressReq,
+      incCityReq: incCityReq,
+      incStateReq: incStateReq,
+      incZipReq: incZipReq
+    };
+
+
+    Meteor.call("editForm", id, msg, stopAt, incOpts, reqOpts, function(error , preferenceId){
+          console.log('edited form');
+          Router.go('/widget/'+id+'/preview');
+          
+          setTimeout(function(){window.location.reload()}, 1000);
+    });
+
+  }
+});
+
+/* HELPERS */
+
+Template.widget.helpers ({
+    fnameReq: function() {
+        return this.reqOptions.incFnameReq;
+    },
+    lnameReq: function() {
+        return this.reqOptions.incLnameReq;
+    },
+    emailReq: function() {
+        return this.reqOptions.incEmailReq;
+    },
+    companyReq: function() {
+        return this.reqOptions.incCompanyReq;
+    },
+    addressReq: function() {
+        return this.reqOptions.incAddressReq;
+    },
+    cityReq: function() {
+        return this.reqOptions.incCityReq;
+    },
+    stateReq: function() {
+        return this.reqOptions.incStateReq;
+    },
+    zipReq: function() {
+        return this.reqOptions.incZipReq;
+    },
+    phoneReq: function() {
+        return this.reqOptions.incPhoneReq;
+    }
+});
+
+Template.edit_widget.helpers({
+    isChecked: function(context) {
+    return this.context;
+    //why doesn't this work?
+    },
+    isCheckedFname: function() {
+    return this.incFname;
+    },
+    isCheckdedLname: function() {
+    return this.incLname;
+
+    },
+    isCheckdedEmail: function() {
+    return this.incEmail;
+    },
+    isCheckedCompany: function() {
+    return this.incCompany;
+    },
+    isCheckedPhone: function() {
+    return this.incPhone;
+    },
+    isCheckedAddress: function() {
+    return this.incAddress;
+    },
+    isCheckedCity: function() {
+    return this.incCity;
+    },
+    isCheckedState: function() {
+    return this.incState;
+    },
+    isCheckedZip: function() {
+    return this.incZip;
+    }
+
+});
+
+/* FUNCTIONS */
+
+Template.youtubeurls.items = function(){
+    return YouTubeUrl.find( {},{sort: {date: -1}, limit: 1} );
+};
+
+$.fn.serializeObject = function() {
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+}
+
+
+
+
 
 
 

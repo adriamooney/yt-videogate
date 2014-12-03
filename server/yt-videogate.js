@@ -1,21 +1,11 @@
 YouTubeUrl = new Meteor.Collection("youtubeurl");
 
-/*YouTubeUrl.attachSchema(new SimpleSchema({
-
-	email: {
-		type: String,
-    	label: "Email",
-    	optional: false
-	}
-})); */
-
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
+Meteor.startup(function () {
+  // code to run on server at startup
+});
 
 
 Meteor.methods({
- // enterYTURL : function(youtubeId, msg, incFname, incLname, incEmail, incCompany, incPhone, incAddress, incCity, incState, incZip ){
   enterYTURL : function(youtubeId, msg, incOptions, reqOptions ){
     console.log('entering youtube url');
     var preferenceId = YouTubeUrl.insert({
@@ -44,8 +34,7 @@ Meteor.methods({
       {$push: {'lead': {'email': email, 'date': new Date()} } }
     );
   },
-  //editForm: function(id, msg, stopAt, incFname, incLname, incEmail, incCompany, incPhone, incAddress, incCity, incState, incZip ) {
-    editForm: function(id, msg, stopAt, incOptions, reqOptions ) {
+  editForm: function(id, msg, stopAt, incOptions, reqOptions ) {
   	YouTubeUrl.update(
       {_id: id},
       //{$set: {'msg': msg, 'stopAt': stopAt, 'incFname': incFname, 'incLname': incLname, 'incEmail': incEmail, 'incCompany': incCompany, 'incPhone': incCompany, 'incAddress': incAddress, 'incCity': incCity, 'incState': incState, 'incZip': incZip}}
