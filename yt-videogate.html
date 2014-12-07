@@ -118,16 +118,51 @@
 	</div>
 </template>
 
-	<template name="leads">
-		<div style="display:none">
+<template name="leads">
+	<div style="display:block">
 		<span id="pref-{{_id}}"><span id="ytid">{{youtubeId}}</span>, <span id="stopAt">{{stopAt}}</span> {{date}}</span>
 		<span id="vd-gt-msg">{{msg}}</span>
-		<!--<ul>
-		{{#each lead}}
-			<li>{{email}}</li>
-		{{/each}}
-		</ul>-->
+		{{#each leads}}
+            {{fname}}, {{lname}}, {{email}}, {{company}}, {{phone}}, {{address}}, {{city}}, {{state}}, {{zip}}<br />
+        {{/each}}
 	</div>
+</template>
+
+<template name="export">
+    {{#each this}}
+    <div style="display:block">
+        <span id="pref-{{_id}}"><span id="ytid">{{youtubeId}}</span>, <span id="stopAt">{{stopAt}}</span> {{date}}</span>
+        <span id="vd-gt-msg">{{msg}}</span>
+        {{#each leads}}
+            {{#if fname}} {{fname}}{{/if}}
+            {{#if lname}}, {{lname}}{{/if}} 
+            {{#if email}}, {{email}}{{/if}} 
+            {{#if company}}, {{company}},{{/if}} 
+            {{#if phone}}, {{phone}}{{/if}}
+            {{#if address}}, {{address}}{{/if}}
+            {{#if city}}, {{city}}{{/if}}
+            {{#if state}}, {{state}}{{/if}} 
+            {{#if zip}},{{zip}}{{/if}}<br />
+        {{/each}}
+    </div>
+    {{/each}}
+</template>
+
+<template name="exportOne">
+        <h2 id="pref-{{_id}}">{{youtubeId}}</h2>
+
+        {{#each leads}}
+            {{#if fname}} {{fname}}{{/if}}
+            {{#if lname}}, {{lname}}{{/if}} 
+            {{#if email}}, {{email}}{{/if}} 
+            {{#if company}}, {{company}},{{/if}} 
+            {{#if phone}}, {{phone}}{{/if}}
+            {{#if address}}, {{address}}{{/if}}
+            {{#if city}}, {{city}}{{/if}}
+            {{#if state}}, {{state}}{{/if}} 
+            {{#if zip}},{{zip}}{{/if}}<br />
+        {{/each}}
+
 </template>
 
 <template name="youtubeurls">

@@ -25,6 +25,24 @@ Router.route('/widget/:_id/preview', function () {
 
 }); 
 
+Router.route('/export', function () {
+  this.render('export', {
+    data: function () {
+      return YouTubeUrl.find();
+    }
+  });
+
+}); 
+
+Router.route('/widget/:_id/export', function () {
+  this.render('exportOne', {
+    data: function () {
+      return YouTubeUrl.findOne({_id: this.params._id});
+    }
+  });
+
+}); 
+
 Router.route('/widget/:_id/edit', function () {
   this.render('edit_widget', {
     data: function () {
@@ -347,14 +365,19 @@ Template.widget.events({
     e.preventDefault();
     //only set cookie if form is filled out correctly
 
-        var email = $('#ytvg_email').val();
-        var a = $('#vg-widget-form').serializeObject();
-        console.log(a);
+        //var email = $('#ytvg_email').val();
+        var fields = $('#vg-widget-form').serializeObject();
+        //console.log(fields);
+        fields.date = new Date();
+
+        console.log(fields);
+
+
         
         if ( $('#vg-widget-form').parsley().isValid() ) {
         
             //TODO: turn all field values into an object (a above)
-           Meteor.call("submitForm",email, this._id, function() {
+           Meteor.call("submitForm", fields, this._id, function() {
             Cookie.set('yt-vidgate', 'yt-vidgate-unlocked');
             $('#vg-widget-form').remove();
           }); 

@@ -15,10 +15,9 @@ Meteor.methods({
           incOptions: incOptions,
           reqOptions: reqOptions,
           stopAt: 0,
-          lead: {
-	          	email: '',
-	          	date: new Date()
-          	}
+          leads: [ 
+
+          ]
       });
     return preferenceId;
   },
@@ -28,16 +27,15 @@ Meteor.methods({
       {$set: {'stopAt': stopAt}}
     );
   },
-  submitForm: function(email, id) {
+  submitForm: function(fields, id) {
   	YouTubeUrl.update(
       {_id: id},
-      {$push: {'lead': {'email': email, 'date': new Date()} } }
+      {$push: {'leads': fields } }
     );
   },
   editForm: function(id, msg, stopAt, incOptions, reqOptions ) {
   	YouTubeUrl.update(
       {_id: id},
-      //{$set: {'msg': msg, 'stopAt': stopAt, 'incFname': incFname, 'incLname': incLname, 'incEmail': incEmail, 'incCompany': incCompany, 'incPhone': incCompany, 'incAddress': incAddress, 'incCity': incCity, 'incState': incState, 'incZip': incZip}}
       {$set: {'msg': msg, 'stopAt': stopAt, 'incOptions': incOptions, 'reqOptions': reqOptions}}
     );
   }
