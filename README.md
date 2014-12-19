@@ -1,12 +1,12 @@
 <snippet>
-  <content><![CDATA[
-# ${1:YouTube Video Gate}
+  <content>
+#YouTube Video Gate
 
 This is a Meteor application that allows you to put a video gate to collect contact info within a video on any YouTube video.
 
 ## Installation
 
-In order to run this application you must have Node and Meteor installed.  Then run the application and go to http://localhost:3000/ like you would any Meteor application.  Enter in a YouTube URL and get going!
+In order to run this application you must have Node and Meteor installed.  Then run the application and go to http://localhost:3000/ like you would any Meteor application running locally.  Enter in a YouTube URL and get going!
 
 ## Usage
 
@@ -24,7 +24,7 @@ OR
 
 This needs to be cleaned up.  Also ideally you would be able to connect leads directly to some service like Mailchimp or whatever you want.
 
-TODO: Write license
-]]></content>
+
+</content>
   <tabTrigger>readme</tabTrigger>
 </snippet>
