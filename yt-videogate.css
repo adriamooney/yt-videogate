@@ -36,8 +36,6 @@
 	height:0;
 }
 #vg-widget-form .form-inline .form-group{
-	/*margin-bottom:8px;
-	margin-top:16px; */
 	margin: 0;
 }
 
@@ -49,5 +47,11 @@
 
 .btn-row {
 	margin: 20px 0;
+}
+.slider {
+	margin: 15px 15px 5px 15px;
+}
+#field {
+	margin-bottom:10px;
 }
 

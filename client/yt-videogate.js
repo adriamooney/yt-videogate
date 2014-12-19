@@ -134,7 +134,7 @@ Template.edit_widget.rendered = function () {
             }
           });
           $(".slider").Link('lower').to($("#field"));
-          $("#videogate-time-save").fadeIn();
+          $(".videogate-time-save").show();
           $(".slider").val(stopAt);
 
 
@@ -337,7 +337,7 @@ Template.youtubeURLForm.events({
             }
           });
           $(".slider").Link('lower').to($("#field"));
-          $("#videogate-time-save").fadeIn();
+          $(".videogate-time-save").fadeIn();
 
 
         } 
